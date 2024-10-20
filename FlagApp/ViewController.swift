@@ -9,11 +9,32 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-    }
+    @IBAction func worldFlagsTapped(_ sender: UIButton) {
+           performSegue(withIdentifier: "showWorldFlags", sender: self)
+       }
 
+       @IBAction func europeanFlagsTapped(_ sender: UIButton) {
+           performSegue(withIdentifier: "showEuropeanFlags", sender: self)
+       }
 
+       @IBAction func americanFlagsTapped(_ sender: UIButton) {
+           performSegue(withIdentifier: "showAmericanFlags", sender: self)
+       }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            if let destinationVC = segue.destination as? FlagViewController {
+                switch segue.identifier {
+                case "showWorldFlags":
+                    destinationVC.countries = allCountries
+                case "showEuropeanFlags":
+                    destinationVC.countries = europeanCountries
+                case "showAmericanFlags":
+                    destinationVC.countries = americanCountries
+                default:
+                    break
+                }
+            }
+        }
+    
 }
 
